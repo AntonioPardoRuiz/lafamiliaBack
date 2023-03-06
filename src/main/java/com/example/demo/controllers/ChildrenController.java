@@ -28,8 +28,11 @@ public class ChildrenController {
 	//Recuperamos el listado de usuarios. Para comenzar trabajamos con este metodo
 	@GetMapping("/getChildren")
 	public ResponseEntity getChildren() throws Exception, Throwable {
-        System.out.println("getChildren");
+        
+		System.out.println("getChildren");
+
 		return new ResponseEntity(iChildrenDao.getChildren(),HttpStatus.OK);
+	
 	}
 
 
