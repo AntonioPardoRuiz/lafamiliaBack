@@ -13,5 +13,8 @@ public interface IUsuariosDao {
 	//Recordemos que trabajamos con colecciones. 
 	//Borramos. 
 
+	//Damos de alta. 
+	public String postUsuarios(Usuarios Usuarios) throws InterruptedException, ExecutionException;
+
     
 }
