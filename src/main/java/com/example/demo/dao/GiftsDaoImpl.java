@@ -50,5 +50,24 @@ public class GiftsDaoImpl implements IGiftsDao {
     		return null;
     	}	
     }
+
+
+	/** METODO POST QUE PERMITE AÑADIR DATOS A LOS PROCESOS. */
+	@Override
+	public String postGifts(Gifts gifts) throws InterruptedException, ExecutionException {
+
+		System.out.println("postGiftsDao");
+		//Sin documento
+		///String documento = null;
+	    //System.out.println(documento);
+		Firestore dbFirestore = firebase.getFirestore();
+		//Si document() no le defines, nada te genera de manera automatica el nombre del documento en firebase.
+		
+		ApiFuture<WriteResult> collectionsApiFuture = dbFirestore.collection(COL_NAME).document().set(gifts);
+		System.out.println(collectionsApiFuture.get().getUpdateTime().toString());
+
+		return collectionsApiFuture.get().getUpdateTime().toString();
+	
+	}
     
 }

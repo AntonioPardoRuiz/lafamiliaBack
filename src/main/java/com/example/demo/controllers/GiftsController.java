@@ -1,11 +1,15 @@
 package com.example.demo.controllers;
 
 import com.example.demo.dao.IGiftsDao;
+import com.example.demo.entitys.Gifts;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -30,6 +34,22 @@ public class GiftsController {
 	public ResponseEntity getGifts() throws Exception, Throwable {
         System.out.println("getGifts");
 		return new ResponseEntity(iGiftsDao.getGifts(),HttpStatus.OK);
+	}
+
+	/**
+	 * POST USUARIOS
+	 * @return
+	 * @throws Exception
+	 * @throws Throwable
+	 */
+	//Quitamos el CORS
+	@CrossOrigin(origins= {"*"})
+	//La ruta donde vamos acceder ahora http://..../usuario/list
+	//Recuperamos el listado de usuarios. Para comenzar trabajamos con este metodo
+	@PostMapping("/postGifts")
+	public ResponseEntity postGifts(@RequestBody Gifts Gifts) throws Exception, Throwable {
+        System.out.println("postGifts");
+		return new ResponseEntity(iGiftsDao.postGifts(Gifts),HttpStatus.OK);
 	}
 
 

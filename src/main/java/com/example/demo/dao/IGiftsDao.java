@@ -10,6 +10,8 @@ public interface IGiftsDao {
 	public List<Gifts> getGifts() throws InterruptedException, ExecutionException;
 	//Recordemos que trabajamos con colecciones. 
 	//Borramos. 
+		//Damos de alta. 
+	public String postGifts(Gifts gifts) throws InterruptedException, ExecutionException;
 
     
 }
