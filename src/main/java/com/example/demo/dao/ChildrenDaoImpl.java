@@ -6,7 +6,10 @@ import com.example.demo.config.FirebaseInitializer;
 import com.example.demo.entitys.*;
 import com.google.api.core.ApiFuture;
 import com.google.cloud.firestore.DocumentSnapshot;
+import com.google.cloud.firestore.Firestore;
 import com.google.cloud.firestore.QuerySnapshot;
+import com.google.cloud.firestore.WriteResult;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -41,5 +44,23 @@ public class ChildrenDaoImpl implements IChildrenDao {
 
 
     }
+
+	/** METODO POST QUE PERMITE AÑADIR DATOS A LOS PROCESOS. */
+	@Override
+	public String postChildren(Children children) throws InterruptedException, ExecutionException {
+
+		System.out.println("postChildrenDao");
+		//Sin documento
+		///String documento = null;
+	    //System.out.println(documento);
+		Firestore dbFirestore = firebase.getFirestore();
+		//Si document() no le defines, nada te genera de manera automatica el nombre del documento en firebase.
+		
+		ApiFuture<WriteResult> collectionsApiFuture = dbFirestore.collection(COL_NAME).document().set(children);
+		System.out.println(collectionsApiFuture.get().getUpdateTime().toString());
+
+		return collectionsApiFuture.get().getUpdateTime().toString();
+	
+	}
     
 }

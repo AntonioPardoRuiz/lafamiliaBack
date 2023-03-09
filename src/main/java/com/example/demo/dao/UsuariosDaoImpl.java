@@ -1,5 +1,6 @@
 package com.example.demo.dao;
 import java.util.List;
+import java.util.Properties;
 import java.util.concurrent.ExecutionException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -21,11 +22,20 @@ import com.google.firebase.cloud.FirestoreClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+//Proceso de Envio Email
+
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
+
+
 @Service
 public class UsuariosDaoImpl implements IUsuariosDao {
 
     @Autowired
 	private FirebaseInitializer firebase;
+	//Proceso de envio via email 
+	@Autowired
+    private JavaMailSender javaMailSender;
 
     public static final String COL_NAME="users";
 
@@ -67,6 +77,22 @@ public class UsuariosDaoImpl implements IUsuariosDao {
 
 		return collectionsApiFuture.get().getUpdateTime().toString();
 	
+	}
+
+	@Override
+	public String enviarMensaje(Usuarios Usuarios) throws InterruptedException, ExecutionException {
+		//Definimos todos los procesos.
+		SimpleMailMessage msg = new SimpleMailMessage();
+        msg.setTo(Usuarios.getEmail());
+
+        msg.setSubject("Testing from Spring Boot");
+        msg.setText("Hello World \n Spring Boot Email");
+
+        javaMailSender.send(msg);
+
+		return("Envio Correcto");
+     
+		
 	}
     
 }

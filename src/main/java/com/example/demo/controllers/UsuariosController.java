@@ -52,6 +52,22 @@ public class UsuariosController {
 		return new ResponseEntity(iUsuariosDao.postUsuarios(Usuarios),HttpStatus.OK);
 	}
 
+	/**
+	 * ENVIAR MENSAJE
+	 * @return
+	 * @throws Exception
+	 * @throws Throwable
+	 */
+	//Quitamos el CORS
+	@CrossOrigin(origins= {"*"})
+	//La ruta donde vamos acceder ahora http://..../usuario/list
+	//Recuperamos el listado de usuarios. Para comenzar trabajamos con este metodo
+	@PostMapping("/enviarMensaje")
+	public ResponseEntity enviarMensaje(@RequestBody Usuarios Usuarios) throws Exception, Throwable {
+        System.out.println("EnviarMensaje");
+		return new ResponseEntity(iUsuariosDao.enviarMensaje(Usuarios),HttpStatus.OK);
+	}
+
 
 }
 
