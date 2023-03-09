@@ -82,11 +82,12 @@ public class UsuariosDaoImpl implements IUsuariosDao {
 	@Override
 	public String enviarMensaje(Usuarios Usuarios) throws InterruptedException, ExecutionException {
 		//Definimos todos los procesos.
+		String codigoUsuario = "12345";
 		SimpleMailMessage msg = new SimpleMailMessage();
         msg.setTo(Usuarios.getEmail());
 
-        msg.setSubject("Testing from Spring Boot");
-        msg.setText("Hello World \n Spring Boot Email");
+        msg.setSubject("Bienvenido a la Familia:"+Usuarios.getNombre());
+        msg.setText("En este enlace dispone la aplicacion para su descarga: URL,"+"\n\nRegistrese con codigo de usuario:"+codigoUsuario);
 
         javaMailSender.send(msg);
 
