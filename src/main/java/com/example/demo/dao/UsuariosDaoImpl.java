@@ -61,6 +61,35 @@ public class UsuariosDaoImpl implements IUsuariosDao {
     	}	
     }
 
+	/** Recuperamos el valor de un usuario por un id. */
+
+	@Override
+	public List<Usuarios> getUsuariosId(String id) throws InterruptedException, ExecutionException {
+
+		List<Usuarios> response = new ArrayList<>();
+    	Usuarios usuarios;		
+		ApiFuture<QuerySnapshot> querySnapshotApiFuture = firebase.getFirestore().collection(COL_NAME).whereEqualTo("id",id).get();
+		    	
+		try {
+		     for(DocumentSnapshot doc : querySnapshotApiFuture.get().getDocuments()) {
+		         usuarios = doc.toObject(Usuarios.class);
+		         usuarios.setId(doc.getId());
+		         response.add(usuarios);
+		         System.out.println("Respuesta Back");
+		         System.out.println(response);
+		     }
+		   //Devolvemos la respuesta en este caso los json de las coleccion
+		   return response;
+		    	
+		 }catch(Exception e) {
+			 	System.out.println(e);
+		        return null;
+		 }	
+		    	
+   }
+
+
+
 	/** METODO POST QUE PERMITE AÑADIR DATOS A LOS PROCESOS. */
 	@Override
 	public String postUsuarios(Usuarios Usuarios) throws InterruptedException, ExecutionException {
@@ -95,5 +124,6 @@ public class UsuariosDaoImpl implements IUsuariosDao {
      
 		
 	}
+
     
 }

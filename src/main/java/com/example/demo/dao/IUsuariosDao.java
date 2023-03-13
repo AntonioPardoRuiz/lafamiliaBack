@@ -10,7 +10,9 @@ public interface IUsuariosDao {
     //Recordemos que trabajamos con colecciones. 
 	//Obtenemos, añadimos que si se realiza una llamada, se adjunten las excepciones. 
 	public List<Usuarios> getUsuarios() throws InterruptedException, ExecutionException;
-	//Recordemos que trabajamos con colecciones. 
+	//Recordemos que trabajamos con colecciones.
+	//Obtenemos, añadimos que si se realiza una llamada, se adjunten las excepciones. 
+	public List<Usuarios> getUsuariosId(String id) throws InterruptedException, ExecutionException; 
 	//Borramos. 
 
 	//Damos de alta. 
