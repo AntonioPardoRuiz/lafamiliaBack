@@ -108,6 +108,7 @@ public class UsuariosDaoImpl implements IUsuariosDao {
 	
 	}
 
+
 	@Override
 	public String enviarMensaje(Usuarios Usuarios) throws InterruptedException, ExecutionException {
 		//Definimos todos los procesos.
@@ -123,6 +124,22 @@ public class UsuariosDaoImpl implements IUsuariosDao {
 		return("Envio Correcto");
      
 		
+	}
+
+	@Override
+	public String putUsuarios(Usuarios Usuarios) throws InterruptedException, ExecutionException {
+		
+		System.out.println("putUsuariosDao");
+		//Sin documento
+		///String documento = null;
+	    //System.out.println(documento);
+		Firestore dbFirestore = firebase.getFirestore();
+		//Si document() no le defines, nada te genera de manera automatica el nombre del documento en firebase.
+		
+		ApiFuture<WriteResult> collectionsApiFuture = dbFirestore.collection(COL_NAME).document().set(Usuarios);
+		System.out.println(collectionsApiFuture.get().getUpdateTime().toString());
+
+		return collectionsApiFuture.get().getUpdateTime().toString();
 	}
 
     

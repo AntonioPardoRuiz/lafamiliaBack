@@ -18,7 +18,9 @@ public interface IUsuariosDao {
 	//Damos de alta. 
 	public String postUsuarios(Usuarios Usuarios) throws InterruptedException, ExecutionException;
 
-	
+	//Realizar el proceso de PUT USUARIOS.
+	public String putUsuarios(Usuarios Usuarios) throws InterruptedException, ExecutionException;
+
 	//Damos de alta. 
 	public String enviarMensaje(Usuarios Usuarios) throws InterruptedException, ExecutionException;
 
