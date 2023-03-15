@@ -1,6 +1,7 @@
 package com.example.demo.controllers;
 
 import com.example.demo.dao.IGiftsDao;
+import com.example.demo.dao.IStatusDao;
 import com.example.demo.entitys.Gifts;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,8 @@ public class GiftsController {
 
     @Autowired
 	private IGiftsDao iGiftsDao;
+	@Autowired
+	private IStatusDao iStatusDao;
     /**
 	 * GET Usuarios
 	 * @return
@@ -34,6 +37,24 @@ public class GiftsController {
 	public ResponseEntity getGifts() throws Exception, Throwable {
         System.out.println("getGifts");
 		return new ResponseEntity(iGiftsDao.getGifts(),HttpStatus.OK);
+	}
+
+
+
+    /**
+	 * GET Status items
+	 * @return
+	 * @throws Exception
+	 * @throws Throwable
+	 */
+	//Quitamos el CORS
+	@CrossOrigin(origins= {"*"})
+	//La ruta donde vamos acceder ahora http://..../usuario/list
+	//Recuperamos el listado de usuarios. Para comenzar trabajamos con este metodo
+	@GetMapping("/getStatus")
+	public ResponseEntity getStatus() throws Exception, Throwable {
+        System.out.println("getStatus");
+		return new ResponseEntity(iStatusDao.getStatus(),HttpStatus.OK);
 	}
 
 	/**
