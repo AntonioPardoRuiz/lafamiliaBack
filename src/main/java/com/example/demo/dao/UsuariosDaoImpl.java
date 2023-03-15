@@ -1,7 +1,9 @@
 package com.example.demo.dao;
 import java.util.List;
+import java.util.Map;
 import java.util.Properties;
 import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ThreadLocalRandom;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -127,19 +129,89 @@ public class UsuariosDaoImpl implements IUsuariosDao {
 	}
 
 	@Override
-	public String putUsuarios(Usuarios Usuarios) throws InterruptedException, ExecutionException {
-		
-		System.out.println("putUsuariosDao");
-		//Sin documento
-		///String documento = null;
-	    //System.out.println(documento);
-		Firestore dbFirestore = firebase.getFirestore();
-		//Si document() no le defines, nada te genera de manera automatica el nombre del documento en firebase.
-		
-		ApiFuture<WriteResult> collectionsApiFuture = dbFirestore.collection(COL_NAME).document().set(Usuarios);
-		System.out.println(collectionsApiFuture.get().getUpdateTime().toString());
+	public String resetearPassword(Usuarios Usuarios) throws InterruptedException, ExecutionException {
 
-		return collectionsApiFuture.get().getUpdateTime().toString();
+		//Resetamos el password y actualizamos en la base de datos el nuevo password. 
+		
+		//Definimos todos los procesos del envio del password
+		int longitud = 8;
+		//Recuperamos una cadena aleatorio a partir del metodo
+		String nuevoPassword = generarCadena(longitud);
+		System.out.printf("Nuevo Password"+nuevoPassword);
+		SimpleMailMessage msg = new SimpleMailMessage();
+        msg.setTo(Usuarios.getEmail());
+        msg.setSubject("Bienvenido a la Familia:"+Usuarios.getNombre());
+        msg.setText("En este enlace dispone la aplicacion para su descarga: URL,"+"\n\nSu nuevo password es:"+nuevoPassword);
+        javaMailSender.send(msg);
+		//Realizamos la actualizacion del password. 
+		System.out.println("resetearPassword");
+		String id = Usuarios.getId();
+		System.out.println("id:"+id);
+		try{
+			Firestore dbFirestore = firebase.getFirestore();
+			//Si document() no le defines, nada te genera de manera automatica el nombre del documento en firebase.Actualizamos el proceso de putMonederoCaptador
+			DocumentReference  documento = dbFirestore.collection(COL_NAME).document(id);
+			documento.update("password",nuevoPassword);
+			documento.update("confirmPassword",nuevoPassword);
+			return "Actualizacion del password correcta";
+
+		} catch(Exception e) {
+			System.out.println(e.getMessage());
+			return e.getMessage();
+		}
+  
+		
+	}
+
+	public static String generarCadena(int longitud){
+		    // El banco de caracteres
+			String banco = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
+			// La cadena en donde iremos agregando un carácter aleatorio
+			String cadena = "";
+			for (int x = 0; x < longitud; x++) {
+				int indiceAleatorio = numeroAleatorioEnRango(0, banco.length() - 1);
+				char caracterAleatorio = banco.charAt(indiceAleatorio);
+				cadena += caracterAleatorio;
+			}
+			return cadena;
+
+	}
+
+	public static int numeroAleatorioEnRango(int minimo, int maximo) {
+		// nextInt regresa en rango pero con límite superior exclusivo, por eso sumamos 1
+		return ThreadLocalRandom.current().nextInt(minimo, maximo + 1);
+	}
+
+
+	@Override
+	public String putUsuarios(Usuarios Usuarios) throws InterruptedException, ExecutionException {
+
+		System.out.println("putUsuarios");
+		String id = Usuarios.getId();
+		//Recuperamos todos los campos que vamos a actualizar. 
+		String ciudad = Usuarios.getCiudad();
+		String direccion = Usuarios.getDireccion();
+		String pais = Usuarios.getPais();
+		String provincia = Usuarios.getProvincia();
+
+		System.out.println("id:"+id);
+		try{
+			Firestore dbFirestore = firebase.getFirestore();
+			//Si document() no le defines, nada te genera de manera automatica el nombre del documento en firebase.Actualizamos el proceso de putMonederoCaptador
+			DocumentReference  documento = dbFirestore.collection(COL_NAME).document(id);
+			documento.update("ciudad",ciudad);
+			documento.update("direccion",direccion);
+			documento.update("pais",pais);
+			documento.update("provincia",provincia);
+			return "Actualizacion correcta";
+
+		} catch(Exception e) {
+			System.out.println(e.getMessage());
+			return e.getMessage();
+		}
+
+		
+
 	}
 
     

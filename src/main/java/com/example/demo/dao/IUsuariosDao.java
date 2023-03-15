@@ -24,5 +24,8 @@ public interface IUsuariosDao {
 	//Damos de alta. 
 	public String enviarMensaje(Usuarios Usuarios) throws InterruptedException, ExecutionException;
 
+	//Damos de alta. 
+	public String resetearPassword(Usuarios Usuarios) throws InterruptedException, ExecutionException;
+
     
 }

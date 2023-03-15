@@ -103,6 +103,22 @@ public class UsuariosController {
 		return new ResponseEntity(iUsuariosDao.enviarMensaje(Usuarios),HttpStatus.OK);
 	}
 
+	/**
+	 * RESETEAMOS EL PASSWORD
+	 * @return
+	 * @throws Exception
+	 * @throws Throwable
+	 */
+	//Quitamos el CORS
+	@CrossOrigin(origins= {"*"})
+	//La ruta donde vamos acceder ahora http://..../usuario/list
+	//Recuperamos el listado de usuarios. Para comenzar trabajamos con este metodo
+	@PostMapping("/resetearPassword")
+	public ResponseEntity resetearPassword(@RequestBody Usuarios Usuarios) throws Exception, Throwable {
+        System.out.println("EnviarMensaje");
+		return new ResponseEntity(iUsuariosDao.resetearPassword(Usuarios),HttpStatus.OK);
+	}
+
 
 }
 
