@@ -13,5 +13,8 @@ public interface IGiftsDao {
 		//Damos de alta. 
 	public String postGifts(Gifts gifts) throws InterruptedException, ExecutionException;
 
+	//Damos de alta. 
+	public String putGifts(Gifts gifts) throws InterruptedException, ExecutionException;
+
     
 }

@@ -58,7 +58,7 @@ public class GiftsController {
 	}
 
 	/**
-	 * POST USUARIOS
+	 * POST GIFTS
 	 * @return
 	 * @throws Exception
 	 * @throws Throwable
@@ -71,6 +71,22 @@ public class GiftsController {
 	public ResponseEntity postGifts(@RequestBody Gifts Gifts) throws Exception, Throwable {
         System.out.println("postGifts");
 		return new ResponseEntity(iGiftsDao.postGifts(Gifts),HttpStatus.OK);
+	}
+
+	/**
+	 * PUT GIFTS
+	 * @return
+	 * @throws Exception
+	 * @throws Throwable
+	 */
+	//Quitamos el CORS
+	@CrossOrigin(origins= {"*"})
+	//La ruta donde vamos acceder ahora http://..../usuario/list
+	//Recuperamos el listado de usuarios. Para comenzar trabajamos con este metodo
+	@PostMapping("/putGifts")
+	public ResponseEntity putGifts(@RequestBody Gifts Gifts) throws Exception, Throwable {
+        System.out.println("putGifts");
+		return new ResponseEntity(iGiftsDao.putGifts(Gifts),HttpStatus.OK);
 	}
 
 

@@ -12,8 +12,11 @@ public class Gifts {
     private float precio;
     private Date fecha;
     private String estado;
+    private String familiar;
 
     /*GENERAMOS LOS GETTERS&SETTERS*/
+
+ 
 
     public String getId() {
         return this.id;
@@ -77,6 +80,14 @@ public class Gifts {
 
     public void setEstado(String estado) {
         this.estado = estado;
+    }
+
+    public String getFamiliar() {
+        return familiar;
+    }
+
+    public void setFamiliar(String familiar) {
+        this.familiar = familiar;
     }
 
 

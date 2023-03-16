@@ -69,5 +69,29 @@ public class GiftsDaoImpl implements IGiftsDao {
 		return collectionsApiFuture.get().getUpdateTime().toString();
 	
 	}
-    
+
+
+	@Override
+	public String putGifts(Gifts gifts) throws InterruptedException, ExecutionException {
+		System.out.println("putGifts");
+		String id =gifts.getId();
+		//Recuperamos todos los campos que vamos a actualizar. 
+		String estado = gifts.getEstado();
+		String familiar = gifts.getFamiliar();
+		System.out.println("id:"+id);
+
+		try{
+			Firestore dbFirestore = firebase.getFirestore();
+			//Si document() no le defines, nada te genera de manera automatica el nombre del documento en firebase.Actualizamos el proceso de putMonederoCaptador
+			DocumentReference  documento = dbFirestore.collection(COL_NAME).document(id);
+			documento.update("estado",estado);
+			documento.update("familiar",familiar);
+
+			return "Actualizacion Correcta";
+
+			} catch(Exception e) {
+				System.out.println(e.getMessage());
+				return e.getMessage();
+		}
+	  }    
 }
