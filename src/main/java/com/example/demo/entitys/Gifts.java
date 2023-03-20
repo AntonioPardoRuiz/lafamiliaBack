@@ -16,8 +16,6 @@ public class Gifts {
 
     /*GENERAMOS LOS GETTERS&SETTERS*/
 
- 
-
     public String getId() {
         return this.id;
     }
