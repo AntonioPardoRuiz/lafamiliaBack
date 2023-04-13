@@ -17,7 +17,7 @@ import com.google.firebase.cloud.FirestoreClient;
 public class FirebaseInitializer {
 	@PostConstruct
 	private void iniFirestore() throws IOException {
-		InputStream serviceAccount =getClass().getClassLoader().getResourceAsStream("mifamilia-3d548-firebase-adminsdk-8l7yt-1670c17d7a.json");
+		InputStream serviceAccount =getClass().getClassLoader().getResourceAsStream("mifamilia-3d548-firebase-adminsdk-8l7yt-b9b5bf9ad4.json");
 		//InputStream serviceAccount =getClass().getClassLoader().getResourceAsStream("catchlead.json");
         FirebaseOptions options = FirebaseOptions.builder()
                 .setCredentials(GoogleCredentials.fromStream(serviceAccount))

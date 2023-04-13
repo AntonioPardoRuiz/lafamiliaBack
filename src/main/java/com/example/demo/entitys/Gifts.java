@@ -7,7 +7,7 @@ public class Gifts {
 	private String id;
     private String nombre;
     private String descripcion;
-    private int nombreHijo;
+    private String nombreHijo;
     private int idUser;
     private float precio;
     private Date fecha;
@@ -40,11 +40,11 @@ public class Gifts {
         this.descripcion = descripcion;
     }
 
-    public int getNombreHijo() {
+    public String getNombreHijo() {
         return this.nombreHijo;
     }
 
-    public void setNombreHijo(int nombreHijo) {
+    public void setNombreHijo(String nombreHijo) {
         this.nombreHijo = nombreHijo;
     }
 

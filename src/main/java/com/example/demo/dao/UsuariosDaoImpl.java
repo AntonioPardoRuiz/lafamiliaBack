@@ -40,6 +40,7 @@ public class UsuariosDaoImpl implements IUsuariosDao {
     private JavaMailSender javaMailSender;
 
     public static final String COL_NAME="users";
+	public static final String COL_NAME_GUEST="guest";
 
 
   //Recordemos que firebase no trabaja con sql.Trabaja con colecciones. 
@@ -114,12 +115,12 @@ public class UsuariosDaoImpl implements IUsuariosDao {
 	@Override
 	public String enviarMensaje(Usuarios Usuarios) throws InterruptedException, ExecutionException {
 		//Definimos todos los procesos.
-		String codigoUsuario = "12345";
 		SimpleMailMessage msg = new SimpleMailMessage();
         msg.setTo(Usuarios.getEmail());
 
-        msg.setSubject("Bienvenido a la Familia:"+Usuarios.getNombre());
-        msg.setText("En este enlace dispone la aplicacion para su descarga: URL,"+"\n\nRegistrese con codigo de usuario:"+codigoUsuario);
+        msg.setSubject("Bienvenido a la Familia:"+Usuarios.getNombre()); 
+        msg.setText("En este enlace dispone la aplicacion para su descarga como invitado: URL,"+"\n\nSu password de usuario es:"+Usuarios.getPassword());
+		msg.setText("Recuerde sus credenciales son: Credenciales:,"+"\n\nSu Email:"+Usuarios.getEmail()+"\n\nSu password:"+Usuarios.getPassword() );
 
         javaMailSender.send(msg);
 
@@ -212,6 +213,25 @@ public class UsuariosDaoImpl implements IUsuariosDao {
 
 		
 
+	}
+
+	/** G U E S T */
+	
+	/** PROCESO GUEST */
+	@Override
+	public String postGuest(Guest guest) throws InterruptedException, ExecutionException {
+
+		System.out.println("postGuestDao");
+		//Sin documento
+		///String documento = null;
+	    //System.out.println(documento);
+		Firestore dbFirestore = firebase.getFirestore();
+		//Si document() no le defines, nada te genera de manera automatica el nombre del documento en firebase.
+		ApiFuture<WriteResult> collectionsApiFuture = dbFirestore.collection(COL_NAME_GUEST).document().set(guest);
+		System.out.println(collectionsApiFuture.get().getUpdateTime().toString());
+
+		return collectionsApiFuture.get().getUpdateTime().toString();
+	
 	}
 
     

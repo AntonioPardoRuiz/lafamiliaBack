@@ -1,6 +1,7 @@
 package com.example.demo.controllers;
 
 import com.example.demo.dao.IUsuariosDao;
+import com.example.demo.entitys.Guest;
 import com.example.demo.entitys.Usuarios;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -70,6 +71,7 @@ public class UsuariosController {
 		return new ResponseEntity(iUsuariosDao.postUsuarios(Usuarios),HttpStatus.OK);
 	}
 
+
 	/**
 	 * PUT USUARIO
 	 * @return
@@ -119,6 +121,23 @@ public class UsuariosController {
 		return new ResponseEntity(iUsuariosDao.resetearPassword(Usuarios),HttpStatus.OK);
 	}
 
+	/* M O D E L O  G U E S T */
+	
+		/**
+	 * POST GUEST
+	 * @return
+	 * @throws Exception
+	 * @throws Throwable
+	 */
+	//Quitamos el CORS
+	@CrossOrigin(origins= {"*"})
+	//La ruta donde vamos acceder ahora http://..../usuario/list
+	//Recuperamos el listado de usuarios. Para comenzar trabajamos con este metodo
+	@PostMapping("/postGuest")
+	public ResponseEntity postGuest(@RequestBody Guest guest) throws Exception, Throwable {
+        System.out.println("postGuest");
+		return new ResponseEntity(iUsuariosDao.postGuest(guest),HttpStatus.OK);
+	}
 
 }
 

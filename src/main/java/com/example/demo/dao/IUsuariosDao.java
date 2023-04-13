@@ -27,5 +27,8 @@ public interface IUsuariosDao {
 	//Damos de alta. 
 	public String resetearPassword(Usuarios Usuarios) throws InterruptedException, ExecutionException;
 
+	//Damos de alta. 
+	public String postGuest(Guest Guest) throws InterruptedException, ExecutionException;
+
     
 }
