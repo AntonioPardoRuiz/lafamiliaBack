@@ -234,5 +234,31 @@ public class UsuariosDaoImpl implements IUsuariosDao {
 	
 	}
 
+		/** Recuperamos el valor de un usuario por un id. */
+
+	@Override
+	public List<Guest> getGuestId(String id) throws InterruptedException, ExecutionException {
+
+		List<Guest> response = new ArrayList<>();
+    	Guest guest;		
+		ApiFuture<QuerySnapshot> querySnapshotApiFuture = firebase.getFirestore().collection(COL_NAME).whereEqualTo("id",id).get();
+		    	
+		try {
+		     for(DocumentSnapshot doc : querySnapshotApiFuture.get().getDocuments()) {
+		         guest = doc.toObject(Guest.class);
+		         guest.setId(doc.getId());
+		         response.add(guest);
+		         System.out.println("Respuesta Back");
+		         System.out.println(response);
+		     }
+		   //Devolvemos la respuesta en este caso los json de las coleccion
+		   return response;
+		    	
+		 }catch(Exception e) {
+			 	System.out.println(e);
+		        return null;
+		 }	
+		    	
+   }
     
 }

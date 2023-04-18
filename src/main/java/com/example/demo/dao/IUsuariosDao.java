@@ -30,5 +30,8 @@ public interface IUsuariosDao {
 	//Damos de alta. 
 	public String postGuest(Guest Guest) throws InterruptedException, ExecutionException;
 
+	//Obtenemos, añadimos que si se realiza una llamada, se adjunten las excepciones. 
+	public List<Guest> getGuestId(String id) throws InterruptedException, ExecutionException; 
+
     
 }

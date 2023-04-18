@@ -139,6 +139,22 @@ public class UsuariosController {
 		return new ResponseEntity(iUsuariosDao.postGuest(guest),HttpStatus.OK);
 	}
 
+	/**
+	 * GET GUESTID
+	 * @return
+	 * @throws Exception
+	 * @throws Throwable
+	 */
+	//Quitamos el CORS
+	@CrossOrigin(origins= {"*"})
+	//La ruta donde vamos acceder ahora http://..../usuario/list
+	//Recuperamos el listado de usuarios. Para comenzar trabajamos con este metodo
+	@GetMapping("/getGuestId")
+	public ResponseEntity getGuestId(@RequestParam String id ) throws Exception, Throwable {
+        System.out.println("getUsuariosId");
+		return new ResponseEntity(iUsuariosDao.getGuestId(id),HttpStatus.OK);
+	}
+
 }
 
 
