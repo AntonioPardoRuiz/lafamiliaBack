@@ -151,7 +151,7 @@ public class UsuariosController {
 	//Recuperamos el listado de usuarios. Para comenzar trabajamos con este metodo
 	@GetMapping("/getGuestId")
 	public ResponseEntity getGuestId(@RequestParam String id ) throws Exception, Throwable {
-        System.out.println("getUsuariosId");
+        System.out.println("getGuestId:"+id);
 		return new ResponseEntity(iUsuariosDao.getGuestId(id),HttpStatus.OK);
 	}
 

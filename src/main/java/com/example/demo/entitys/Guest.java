@@ -21,7 +21,7 @@ public class Guest {
     private String pais;
     private String otros;
     private Date fechaAlta;
-    private int idRol;
+    private String idRol;
 
 
     public String getId() {
@@ -161,11 +161,11 @@ public class Guest {
         this.fechaAlta = fechaAlta;
     }
   
-    public int getIdRol() {
+    public String getIdRol() {
         return this.idRol;
     }
 
-    public void setIdRol(int idRol) {
+    public void setIdRol(String idRol) {
         this.idRol = idRol;
     }
 

@@ -241,7 +241,7 @@ public class UsuariosDaoImpl implements IUsuariosDao {
 
 		List<Guest> response = new ArrayList<>();
     	Guest guest;		
-		ApiFuture<QuerySnapshot> querySnapshotApiFuture = firebase.getFirestore().collection(COL_NAME).whereEqualTo("id",id).get();
+		ApiFuture<QuerySnapshot> querySnapshotApiFuture = firebase.getFirestore().collection(COL_NAME_GUEST).whereEqualTo("id",id).get();
 		    	
 		try {
 		     for(DocumentSnapshot doc : querySnapshotApiFuture.get().getDocuments()) {
